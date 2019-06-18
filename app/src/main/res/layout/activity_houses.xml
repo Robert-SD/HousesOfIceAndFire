@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:background="@color/semiTransparent"
             android:elevation="1dp"
-            android:visibility="@{viewModel.houses.size > 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:visibility="@{viewModel.loading == true ? View.VISIBLE : View.GONE}"
             tools:visibility="gone">
 
             <ProgressBar

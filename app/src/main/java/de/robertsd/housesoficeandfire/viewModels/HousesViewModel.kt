@@ -11,12 +11,14 @@ import kotlinx.coroutines.launch
 class HousesViewModel : ViewModel() {
 
     val houses = MutableLiveData<List<House>>()
+    val loading = MutableLiveData<Boolean>()
 
     init {
         loadAllHouses()
     }
 
     fun loadAllHouses() {
+        loading.value = true
         GlobalScope.launch(Dispatchers.IO) {
             val housesFromAPI = ArrayList<House>()
             for (i in 1..1) {
@@ -25,6 +27,7 @@ class HousesViewModel : ViewModel() {
             }
             GlobalScope.launch(Dispatchers.Main) {
                 houses.value = housesFromAPI
+                loading.value = false
             }
         }
     }
