@@ -1,5 +1,6 @@
 package de.robertsd.housesoficeandfire.network
 
+import de.robertsd.housesoficeandfire.models.Character
 import de.robertsd.housesoficeandfire.models.House
 import de.robertsd.housesoficeandfire.network.RetrofitFactory.BASE_URL
 import kotlinx.coroutines.Deferred
@@ -13,6 +14,6 @@ interface Services {
     @GET("$BASE_URL/houses")
     fun getHousesAsync(@Query("page") page: String, @Query("pageSize") pageSize: String): Deferred<Response<List<House>>>
 
-    @GET("$BASE_URL/houses/{number}")
-    fun getHouseWithNumber(@Path("number") number: String): Deferred<Response<House>>
+    @GET("$BASE_URL/characters/{id}")
+    fun getCharacterWithId(@Path("id") id: String): Deferred<Response<Character>>
 }

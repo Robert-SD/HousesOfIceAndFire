@@ -21,7 +21,7 @@ class HousesViewModel : ViewModel() {
         loading.value = true
         GlobalScope.launch(Dispatchers.IO) {
             val housesFromAPI = ArrayList<House>()
-            for (i in 1..1) {
+            for (i in 1..9) {
                 val houses = ServiceImpl.getAllHouses(i)
                 housesFromAPI.addAll(houses)
             }

@@ -16,7 +16,6 @@ class HouseDetails : AppCompatActivity() {
     private lateinit var binding: ActivityHouseDetailsBinding
     private lateinit var viewModel: HouseDetailsViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val house = intent.extras?.get(HOUSE) as House
@@ -24,6 +23,7 @@ class HouseDetails : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         viewModel = ViewModelProviders.of(this).get(HouseDetailsViewModel::class.java)
         viewModel.house = house
+        viewModel.setup()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_house_details)
         binding.setLifecycleOwner { this.lifecycle }
         binding.viewModel = viewModel

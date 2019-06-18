@@ -1,5 +1,7 @@
 package de.robertsd.housesoficeandfire.network
 
+import android.util.Log
+import de.robertsd.housesoficeandfire.models.Character
 import de.robertsd.housesoficeandfire.models.House
 import retrofit2.HttpException
 
@@ -19,20 +21,22 @@ class ServiceImpl {
                     return emptyList()
                 }
             } catch (exception: HttpException) {
+                Log.e("AllHouses", exception.message())
             }
             return emptyList()
         }
 
-        suspend fun getHouseWithNumber(number: Int): House? {
-            val request = service.getHouseWithNumber(number.toString())
+        suspend fun getCharacterWithId(id: String): Character? {
+            val request = service.getCharacterWithId(id)
             try {
                 val response = request.await()
                 if (response.body() != null) {
-                    response.body().let { return it!! }
+                    response.body().let { return it }
                 } else {
                     return null
                 }
             } catch (exception: HttpException) {
+                Log.e("CharacterWithId", exception.message())
             }
             return null
         }

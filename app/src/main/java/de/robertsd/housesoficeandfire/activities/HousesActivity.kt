@@ -32,9 +32,9 @@ class HousesActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.rvHouses.layoutManager = LinearLayoutManager(this)
         binding.rvHouses.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        binding.rvHouses.setHasFixedSize(true)
         viewModel.houses.observe(this, Observer {
             binding.rvHouses.adapter = generateAdapter(it, ::openHouseDetails)
+            binding.rvHouses.setHasFixedSize(true)
         })
     }
 
