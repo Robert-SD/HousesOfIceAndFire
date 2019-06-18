@@ -1,44 +1,60 @@
 package de.robertsd.housesoficeandfire.network
 
-import android.util.Log
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.widget.Toast
+import de.robertsd.housesoficeandfire.R
 import de.robertsd.housesoficeandfire.models.Character
 import de.robertsd.housesoficeandfire.models.House
-import retrofit2.HttpException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class ServiceImpl {
 
-    companion object {
-        private const val amountOfResultsPerPage = "50"
-        private val service = RetrofitFactory.makeRetrofitService()
+class ServiceImpl(var context: Context) {
 
-        suspend fun getAllHouses(page: Int): List<House> {
+    private val amountOfResultsPerPage = "50"
+    private val service = RetrofitFactory.makeRetrofitService()
+
+    suspend fun getAllHouses(page: Int): List<House>? {
+        if (isNetworkAvailable()) {
             val request = service.getHousesAsync(page.toString(), amountOfResultsPerPage)
-            try {
-                val response = request.await()
-                if (response.body() != null) {
-                    response.body().let { return it!! }
-                } else {
-                    return emptyList()
-                }
-            } catch (exception: HttpException) {
-                Log.e("AllHouses", exception.message())
+            val response = request.await()
+            if (response.isSuccessful && response.body() != null) {
+                return response.body()!!
             }
-            return emptyList()
         }
+        showErrorToast()
+        return null
+    }
 
-        suspend fun getCharacterWithId(id: String): Character? {
+    suspend fun getCharacterWithId(id: String): Character? {
+        if (isNetworkAvailable()) {
             val request = service.getCharacterWithId(id)
-            try {
-                val response = request.await()
-                if (response.body() != null) {
-                    response.body().let { return it }
-                } else {
-                    return null
-                }
-            } catch (exception: HttpException) {
-                Log.e("CharacterWithId", exception.message())
+            val response = request.await()
+            if (response.isSuccessful && response.body() != null) {
+                response.body().let { return it }
             }
-            return null
+        }
+        showErrorToast()
+        return null
+    }
+
+    private fun showErrorToast() {
+        GlobalScope.launch(Dispatchers.Main) {
+            Toast.makeText(context, context.getString(R.string.error_message), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork
+            val capabilities = connectivityManager.getNetworkCapabilities(network)
+            capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+        } else {
+            connectivityManager.activeNetworkInfo.type == ConnectivityManager.TYPE_WIFI
         }
     }
 }

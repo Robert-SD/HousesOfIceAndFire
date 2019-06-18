@@ -2,16 +2,16 @@ package de.robertsd.housesoficeandfire.activities
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import de.robertsd.housesoficeandfire.R
 import de.robertsd.housesoficeandfire.databinding.ActivityHouseDetailsBinding
+import de.robertsd.housesoficeandfire.helper.BaseActivity
 import de.robertsd.housesoficeandfire.helper.Constants.HOUSE
 import de.robertsd.housesoficeandfire.models.House
 import de.robertsd.housesoficeandfire.viewModels.HouseDetailsViewModel
 
-class HouseDetails : AppCompatActivity() {
+class HouseDetails : BaseActivity() {
 
     private lateinit var binding: ActivityHouseDetailsBinding
     private lateinit var viewModel: HouseDetailsViewModel

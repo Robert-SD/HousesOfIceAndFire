@@ -25,6 +25,7 @@ class EspressoTest {
     @Before
     fun setup() {
         IdlingRegistry.getInstance().register(activityRule.activity.viewModel.idlingResource)
+        IdlingRegistry.getInstance().register(activityRule.activity.viewModel.idlingResource)
     }
 
     @Test

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,12 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.robertsd.housesoficeandfire.R
 import de.robertsd.housesoficeandfire.databinding.ActivityHousesBinding
+import de.robertsd.housesoficeandfire.helper.BaseActivity
 import de.robertsd.housesoficeandfire.helper.Constants.HOUSE
 import de.robertsd.housesoficeandfire.helper.HousesAdapter
 import de.robertsd.housesoficeandfire.models.House
 import de.robertsd.housesoficeandfire.viewModels.HousesViewModel
 
-class HousesActivity : AppCompatActivity() {
+class HousesActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHousesBinding
     lateinit var viewModel: HousesViewModel
