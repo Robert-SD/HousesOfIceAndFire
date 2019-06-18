@@ -21,7 +21,7 @@ import de.robertsd.housesoficeandfire.viewModels.HousesViewModel
 class HousesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHousesBinding
-    private lateinit var viewModel: HousesViewModel
+    lateinit var viewModel: HousesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
