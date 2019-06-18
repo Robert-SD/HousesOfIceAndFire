@@ -29,7 +29,7 @@ class EspressoTest {
     }
 
     @Test
-    fun test1() {
+    fun given_listContainsHouses_when_clickOnEntry_should_displayDetailsContent() {
         onView(
             withRecyclerView(R.id.rvHouses).atPositionOnView(
                 1,
