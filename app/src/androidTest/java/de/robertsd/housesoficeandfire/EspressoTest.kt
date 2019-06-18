@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import de.robertsd.housesoficeandfire.activities.HousesActivity
+import de.robertsd.housesoficeandfire.helper.IdlingResource
 import de.robertsd.housesoficeandfire.helper.RecyclerViewAction.Companion.withRecyclerView
 import org.hamcrest.CoreMatchers.not
 import org.junit.Before
@@ -24,8 +25,7 @@ class EspressoTest {
 
     @Before
     fun setup() {
-        IdlingRegistry.getInstance().register(activityRule.activity.viewModel.idlingResource)
-        IdlingRegistry.getInstance().register(activityRule.activity.viewModel.idlingResource)
+        IdlingRegistry.getInstance().register(IdlingResource.idlingResource)
     }
 
     @Test

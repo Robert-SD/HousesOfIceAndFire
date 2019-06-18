@@ -2,7 +2,7 @@ package de.robertsd.housesoficeandfire.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.test.espresso.idling.CountingIdlingResource
+import de.robertsd.housesoficeandfire.helper.IdlingResource
 import de.robertsd.housesoficeandfire.models.House
 import de.robertsd.housesoficeandfire.network.ServiceImpl
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,6 @@ class HouseDetailsViewModel : ViewModel(), KoinComponent {
     var house: House? = null
     var titles = MutableLiveData<String>()
     var lord = MutableLiveData<String>()
-    var idlingResource = CountingIdlingResource("CHARACTERS_LOADING")
 
     fun setup() {
         determineTitles()
@@ -40,7 +39,7 @@ class HouseDetailsViewModel : ViewModel(), KoinComponent {
 
     private fun determineLord() {
         if (house!!.currentLord.length > 0) {
-            idlingResource.increment()
+            IdlingResource.increment()
             GlobalScope.launch(Dispatchers.IO) {
                 val characterId = house!!.currentLord.substring(45)
                 val service: ServiceImpl by inject()
@@ -49,9 +48,9 @@ class HouseDetailsViewModel : ViewModel(), KoinComponent {
                     if (character != null) {
                         lord.value = character.name
                     }
+                    IdlingResource.decrement()
                 }
             }
-            idlingResource.decrement()
         }
     }
 }
