@@ -57,7 +57,7 @@ class HousesActivity : BaseActivity() {
     }
 
     private fun openHouseDetails(house: House) {
-        val intent = Intent(this, HouseDetails::class.java)
+        val intent = Intent(this, HouseDetailsActivity::class.java)
         intent.putExtra(HOUSE, house)
         startActivity(intent)
     }

@@ -11,7 +11,7 @@ import de.robertsd.housesoficeandfire.helper.Constants.HOUSE
 import de.robertsd.housesoficeandfire.models.House
 import de.robertsd.housesoficeandfire.viewModels.HouseDetailsViewModel
 
-class HouseDetails : BaseActivity() {
+class HouseDetailsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHouseDetailsBinding
     private lateinit var viewModel: HouseDetailsViewModel
