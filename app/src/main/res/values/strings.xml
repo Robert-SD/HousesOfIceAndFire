@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HousesOfIceAndFire</string>
+    <string name="loading_houses_of_ice_and_fire">Loading houses of ice and fire...</string>
 </resources>
