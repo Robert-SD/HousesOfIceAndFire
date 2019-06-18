@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.robertsd.housesoficeandfire.databinding.HouseItemBinding
 import de.robertsd.housesoficeandfire.models.House
 
-class HousesAdapter(val list: List<House>, private val action: (house: House) -> Unit) :
+class HousesAdapter(private val list: List<House>, private val action: (house: House) -> Unit) :
     RecyclerView.Adapter<HousesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +30,9 @@ class HousesAdapter(val list: List<House>, private val action: (house: House) ->
 
         fun bind(house: House) {
             binding.house = house
+            binding.clFrame.setOnClickListener {
+                action(house)
+            }
             binding.executePendingBindings()
         }
     }

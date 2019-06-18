@@ -1,5 +1,7 @@
 package de.robertsd.housesoficeandfire.models
 
+import java.io.Serializable
+
 data class House(
     val ancestralWeapons: List<String>,
     val cadetBranches: List<Any>,
@@ -17,4 +19,4 @@ data class House(
     val titles: List<String>,
     val url: String,
     val words: String
-)
+) : Serializable
